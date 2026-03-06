@@ -1,65 +1,137 @@
-import Image from "next/image";
+'use client';
+import { useState } from 'react';
+import { hospitals, ambulances, filterHospitalsByType, EmergencyType } from '@/lib/mockData';
+import HospitalCard from '@/components/HospitalCard';
+import AmbulanceCard from '@/components/AmbulanceCard';
+import MapPlaceholder from '@/components/MapPlaceholder';
+import SosButton from '@/components/SosButton';
 
-export default function Home() {
+export default function LandingPage() {
+  const [mode, setMode] = useState<'hospital' | 'ambulance'>('hospital');
+  const [sosFired, setSosFired] = useState(false);
+
+  const filteredHospitals = hospitals;
+  const filteredAmbulances = ambulances.filter(a => a.isAvailable);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div style={{ height: 'calc(100vh - 60px)', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+
+      {/* Hero SOS strip */}
+      {!sosFired ? (
+        <div style={{
+          background: 'linear-gradient(90deg, rgba(255,59,59,0.08) 0%, transparent 100%)',
+          borderBottom: '1px solid rgba(255,59,59,0.12)',
+          padding: '12px 24px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '20px',
+        }}>
+          <div style={{ flex: 1 }}>
+            <h1 style={{
+              fontFamily: 'var(--font-heading)',
+              fontSize: '20px', fontWeight: 800,
+              color: 'var(--sp-text)', marginBottom: '2px',
+            }}>
+              Emergency Response — <span style={{ color: 'var(--sp-brand)' }}>Real-Time Dispatch</span>
+            </h1>
+            <p style={{ fontSize: '12px', color: 'var(--sp-text-muted)' }}>
+              📍 Detecting location… New Delhi, India &nbsp;·&nbsp; 5 hospitals nearby &nbsp;·&nbsp; 3 ambulances available
+            </p>
+          </div>
+          <SosButton onClick={() => setSosFired(true)} />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+      ) : (
+        <div style={{
+          background: 'rgba(255,59,59,0.08)',
+          borderBottom: '1px solid rgba(255,59,59,0.25)',
+          padding: '12px 24px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '12px',
+          animation: 'slide-up 0.3s ease-out',
+        }}>
+          <span style={{ fontSize: '24px' }}>🆘</span>
+          <div>
+            <div style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '16px', color: '#ff3b3b' }}>
+              SOS Activated — Dispatching to nearest units
+            </div>
+            <div style={{ fontSize: '12px', color: 'var(--sp-text-muted)' }}>
+              Parallel blast sent to 5 nearest ambulances · Hospitals alerted
+            </div>
+          </div>
+          <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '6px' }}>
+            <span className="sp-dot-live-danger" />
+            <span style={{ fontSize: '12px', color: '#ff3b3b', fontWeight: 600 }}>DISPATCHING</span>
+          </div>
+        </div>
+      )}
+
+      {/* Main split layout */}
+      <div style={{ flex: 1, display: 'grid', gridTemplateColumns: '420px 1fr', overflow: 'hidden' }}>
+
+        {/* LEFT PANEL */}
+        <div style={{ borderRight: '1px solid var(--sp-border)', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+
+          {/* Search bar */}
+          <div style={{ padding: '16px', borderBottom: '1px solid var(--sp-border)' }}>
+            <input
+              className="sp-input"
+              defaultValue="New Delhi, India — Auto-detected"
+              style={{ marginBottom: '10px' }}
+              readOnly
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            {/* Toggle */}
+            <div style={{
+              display: 'grid', gridTemplateColumns: '1fr 1fr',
+              background: 'var(--sp-surface-3)',
+              borderRadius: '10px', padding: '3px',
+            }}>
+              {(['hospital', 'ambulance'] as const).map(m => (
+                <button key={m} onClick={() => setMode(m)} style={{
+                  padding: '8px',
+                  borderRadius: '8px',
+                  border: 'none',
+                  background: mode === m ? 'var(--sp-brand)' : 'transparent',
+                  color: mode === m ? '#000' : 'var(--sp-text-muted)',
+                  fontWeight: mode === m ? 700 : 400,
+                  cursor: 'pointer',
+                  fontSize: '13px',
+                  transition: 'all 0.15s',
+                  textTransform: 'capitalize',
+                }}>
+                  {m === 'hospital' ? '🏥 Hospitals' : '🚑 Ambulances'}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Results count */}
+          <div style={{ padding: '10px 16px', borderBottom: '1px solid var(--sp-border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <span style={{ fontSize: '12px', color: 'var(--sp-text-muted)' }}>
+              {mode === 'hospital' ? `${filteredHospitals.length} hospitals found` : `${filteredAmbulances.length} ambulances available`}
+            </span>
+            <span style={{ fontSize: '11px', color: 'var(--sp-text-dim)' }}>Sorted by distance</span>
+          </div>
+
+          {/* List */}
+          <div style={{ flex: 1, overflowY: 'auto', padding: '12px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            {mode === 'hospital'
+              ? filteredHospitals.map(h => <HospitalCard key={h.id} hospital={h} />)
+              : filteredAmbulances.map(a => <AmbulanceCard key={a.id} ambulance={a} showActions />)
+            }
+          </div>
         </div>
-      </main>
+
+        {/* RIGHT PANEL — Map */}
+        <div style={{ padding: '16px', overflow: 'hidden' }}>
+          <MapPlaceholder
+            showRoute={sosFired}
+            showAmbulance={sosFired}
+            ambulanceEta={sosFired ? 4 : undefined}
+            label="New Delhi, India"
+          />
+        </div>
+      </div>
     </div>
   );
 }
