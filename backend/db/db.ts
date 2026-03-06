@@ -1,10 +1,11 @@
-// Make sure to install the 'pg' package
-import { drizzle } from "drizzle-orm/node-postgres";
-import { Pool } from "pg";
+import "dotenv/config";
+import { defineConfig } from "drizzle-kit";
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+export default defineConfig({
+  dialect: "postgresql",
+  schema: "./src/schema.ts",
+  dbCredentials: {
+    url: process.env.DATABASE_URL!,
+  },
 });
-const db = drizzle({ client: pool });
 
-export default db;
