@@ -3,7 +3,7 @@
 import { useState,useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
-import SOSButton from "@/components/SosButton";
+import SOSButton from "@/components/SOSButton";
 import EmergencyTypeCard from "@/components/EmergencyTypeCard";
 import BottomNav from "@/components/BottomNav";
 import { emergencyTypes } from "@/data/emergencyTypes";
@@ -13,6 +13,7 @@ export default function Home() {
   const [selectedType, setSelectedType] = useState<string | null>(null);
 
 
+  
 
 
   function handleSOS() {

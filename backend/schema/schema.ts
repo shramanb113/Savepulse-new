@@ -57,20 +57,14 @@ export const requests = mySchema.table("requests", {
 
 export const user = mySchema.table("user", {
   id: text("id").primaryKey(),
-
   name: text("name").notNull(),
-
   email: text("email").notNull().unique(),
-
   phone_number: text("phone_number"),
-
-  role: roleEnum("role").default("user").notNull(),
-
-  emailVerified: boolean("email_verified").default(false).notNull(),
-
-
+  address: text("address"),
+  bloodGroup: text("blood_group"),
+  emergencyContact: text("emergency_contact"),
+  
   createdAt: timestamp("created_at").defaultNow().notNull(),
-
   updatedAt: timestamp("updated_at")
     .defaultNow()
     .$onUpdate(() => new Date())

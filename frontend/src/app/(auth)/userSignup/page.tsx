@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import Header from "@/components/Header";
 import BottomNav from "@/components/BottomNav";
 
@@ -24,30 +24,33 @@ export default function userSignup() {
     });
   }
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
+ async function handleSubmit(e: React.FormEvent) {
+  e.preventDefault();
 
-    const id = crypto.randomUUID();
-    const res = await fetch("http://localhost:3001/user/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: form.userName,
-        email: form.email,
-        id: id,
-      })
+  const id = crypto.randomUUID();
+  const res = await fetch("http://localhost:3001/user/signup", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      id: id,
+      name: form.userName,
+      email: form.email,
+      phone: form.phone,
+      address: form.address,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+      bloodGroup: form.bloodGroup,
+      emergencyContact: form.emergencyContact
+    })
+  });
 
-    });
-
-    const data = await res.json();
-    console.log(data);
-
-    if (res.status === 201) {
-      router.push("/User");
-    }
+  const data = await res.json();
+  if (res.status === 201) {
+    redirect("/User");
+  } else {
+    console.error("Signup failed:", data);
   }
+}
 
   
   return (
@@ -81,7 +84,7 @@ export default function userSignup() {
               User Name
             </label>
             <input
-              name="UserName"
+              name="userName"
               value={form.userName}
               onChange={handleChange}
               required
