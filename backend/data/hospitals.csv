@@ -1,51 +1,51 @@
 hospital_id,hospital_name,latitude,longitude,trauma_center,cardiac_center,icu_beds_available,general_beds_available,oxygen_beds_available,total_beds,current_occupancy_rate,hospital_rating
-1,VitalCare Multispeciality Hospital,22.494039,88.385881,True,True,1,17,3,90,0.9,4.0
-2,CityCare Medical Center,22.574291,88.326926,False,False,2,11,3,95,0.88,3.4
-3,Mediview Hospital,22.588564,88.385494,True,True,3,9,3,44,0.7,3.8
-4,Silver Oak Healthcare,22.61324,88.265418,False,True,2,7,4,70,0.77,3.9
-5,Harmony Multispeciality Hospital,22.610313,88.376939,True,True,1,22,8,122,0.69,4.3
-6,Sunrise Healthcare,22.642572,88.313403,False,False,6,11,5,147,0.91,3.5
-7,Hopewell Medical Center,22.505842,88.381059,True,True,1,7,14,144,0.69,4.3
-8,LifeLine Multispeciality Hospital,22.631077,88.392106,True,False,3,5,8,73,0.82,3.6
-9,GreenLife Medical Institute,22.476441,88.324889,False,True,2,5,3,44,0.82,4.1
-10,Mediview Multispeciality Hospital,22.627615,88.420886,True,False,8,22,23,278,0.75,4.0
-11,Harmony Medical Institute,22.575196,88.327871,True,True,2,28,9,143,0.88,4.7
-12,VitalCare Medical Center,22.639367,88.336225,False,True,5,8,14,149,0.73,4.4
-13,Mediview Multispeciality Hospital,22.506998,88.43839,True,False,7,18,14,144,0.78,3.8
-14,LifeLine Multispeciality Hospital,22.541653,88.317319,False,False,3,24,10,129,0.76,3.5
-15,Prime Medical Center,22.529627,88.389717,False,False,1,7,3,85,0.9,4.5
-16,Global Healthcare,22.598623,88.261868,False,True,4,15,9,167,0.92,3.8
-17,Apollo Care Hospital,22.559444,88.358573,False,True,8,41,6,209,0.72,4.4
-18,Zenith Healthcare,22.513748,88.256803,True,True,5,12,4,104,0.77,3.9
-19,VitalCare Multispeciality Hospital,22.595235,88.279347,False,False,3,14,6,95,0.67,3.6
-20,Mediview Multispeciality Hospital,22.6011,88.274409,False,False,1,11,7,71,0.74,4.7
-21,Medico Healthcare,22.542534,88.274757,True,True,2,15,10,103,0.88,4.0
-22,Silver Oak Multispeciality Hospital,22.60731,88.443226,False,True,6,5,6,146,0.88,4.7
-23,MetroCare Healthcare,22.553602,88.286312,True,False,3,5,4,42,0.83,3.6
-24,Global Hospital,22.647423,88.302128,True,False,2,7,8,110,0.93,4.8
-25,Global Hospital,22.58284,88.38315,True,True,1,9,7,70,0.75,4.1
-26,LifeLine Healthcare,22.543869,88.371767,False,False,14,45,20,288,0.71,3.9
-27,LifeLine Medical Institute,22.630611,88.31827,False,False,3,10,3,129,0.84,3.9
-28,Hopewell Medical Institute,22.562278,88.362336,False,True,2,9,7,45,0.69,4.2
-29,Prime Medical Institute,22.613764,88.338979,False,True,6,16,11,126,0.69,3.8
-30,Harmony Healthcare,22.648121,88.411135,False,False,2,10,6,45,0.9,4.8
-31,LifeLine Medical Institute,22.451541,88.272398,False,False,1,9,8,71,0.93,3.5
-32,Zenith Medical Center,22.574493,88.391043,False,True,1,9,7,81,0.84,3.9
-33,Sunrise Hospital,22.557017,88.394566,False,False,4,8,9,119,0.67,3.7
-34,Apollo Care Hospital,22.543596,88.284272,True,False,3,6,7,64,0.87,3.9
-35,Mediview Multispeciality Hospital,22.577745,88.265087,False,False,4,14,3,82,0.78,4.0
-36,Sunrise Medical Institute,22.635393,88.402541,False,True,1,12,9,133,0.8,4.4
-37,MetroCare Hospital,22.563594,88.328449,False,False,2,12,7,69,0.66,4.7
-38,Prime Medical Institute,22.503854,88.250447,False,False,1,7,3,47,0.73,4.4
-39,Silver Oak Hospital,22.478155,88.366252,True,True,7,13,12,141,0.83,4.2
-40,VitalCare Multispeciality Hospital,22.638948,88.377377,False,True,3,9,4,104,0.77,4.4
-41,Medico Hospital,22.617883,88.426856,False,True,1,9,5,110,0.85,4.4
-42,Global Hospital,22.59544,88.325853,True,True,5,14,6,120,0.87,3.4
-43,Prime Medical Center,22.556009,88.384891,False,True,1,13,8,97,0.7,4.1
-44,Mediview Healthcare,22.453702,88.292529,False,True,1,6,3,41,0.7,4.2
-45,Apollo Care Multispeciality Hospital,22.620306,88.367044,False,False,1,5,6,46,0.84,3.7
-46,Mediview Medical Center,22.561667,88.314847,False,False,1,12,3,84,0.67,4.4
-47,Prime Hospital,22.545343,88.407308,True,True,2,13,5,107,0.87,4.1
-48,Prime Multispeciality Hospital,22.566452,88.370129,True,False,1,12,3,119,0.69,3.7
-49,MetroCare Multispeciality Hospital,22.462572,88.281516,False,True,3,18,9,111,0.92,4.7
-50,VitalCare Medical Center,22.605483,88.262234,True,True,1,8,5,49,0.68,4.2
+1,Eden Hospital,22.5727398,88.3600196,True,True,1,17,3,90,0.9,4.0
+2,Calcutta Medical College & Hospital,22.5722242,88.3614363,False,False,2,11,3,95,0.88,3.4
+3,Vidyasagar State General Hospital,22.4987178,88.3163322,True,True,3,9,3,44,0.7,3.8
+4,Anandalok Hospital,22.5843732,88.4289579,False,True,2,7,4,70,0.77,3.9
+5,Hindustan Health Point,22.4580817,88.3836982,True,True,1,22,8,122,0.69,4.3
+6,Peerless Hospital,22.4809641,88.3938205,False,False,6,11,5,147,0.91,3.5
+7,Bidhannagar State General Hospital,22.5912273,88.4110886,True,True,1,7,14,144,0.69,4.3
+8,Seba Hospital,22.5908731,88.4105441,True,False,3,5,8,73,0.82,3.6
+9,Bidhannagar Sub-Divisional Hospital,22.5907911,88.410894,False,True,2,5,3,44,0.82,4.1
+10,Global Healthcare System,22.5855232,88.4914262,True,False,8,22,23,278,0.75,4.0
+11,Chittaranjan Shishu Hospital,22.5264408,88.3471209,True,True,2,28,9,143,0.88,4.7
+12,Chittaranjan Seva Sadan,22.5259264,88.3470069,False,True,5,8,14,149,0.73,4.4
+13,Chittaranjan National Cancer Institute,22.5252694,88.3466423,True,False,7,18,14,144,0.78,3.8
+14,Institute Of Neurosciences Kolkata,22.5470227,88.3620613,False,False,3,24,10,129,0.76,3.5
+15,ESI Hospital Sealdah,22.5728574,88.3730073,False,False,1,7,3,85,0.9,4.5
+16,Chandi Tala Health Center,22.4866272,88.3460553,False,True,4,15,9,167,0.92,3.8
+17,Behala Balananda Brahmachari Hospital,22.5065586,88.3205755,False,True,8,41,6,209,0.72,4.4
+18,IRIS Hospital,22.4792072,88.375858,True,True,5,12,4,104,0.77,3.9
+19,Red Plus Society Nursing Home,22.4831664,88.3850406,False,False,3,14,6,95,0.67,3.6
+20,Paramount Nursing Home,22.5239877,88.3486944,False,False,1,11,7,71,0.74,4.7
+21,NRS Medical College & Hospital,22.5652972,88.3691544,True,True,2,15,10,103,0.88,4.0
+22,UNB Building NRS Medical College,22.5648794,88.3695623,False,True,6,5,6,146,0.88,4.7
+23,Tarulia Upashasthya Kendra,22.5878701,88.4423075,True,False,3,5,4,42,0.83,3.6
+24,North Dum Dum Municipality Hospital,22.6609462,88.4355111,True,False,2,7,8,110,0.93,4.8
+25,Remedy Hospital,22.4652784,88.3898123,True,True,1,9,7,70,0.75,4.1
+26,Re-Life Hospital,22.6845585,88.3544138,False,False,14,45,20,288,0.71,3.9
+27,New Town Nursing Home,22.6149976,88.4321695,False,False,3,10,3,129,0.84,3.9
+28,The May Fair Hospital,22.624456,88.3785443,False,True,2,9,7,45,0.69,4.2
+29,Rameswara Nursing Home,22.5900155,88.3929551,False,True,6,16,11,126,0.69,3.8
+30,Bhagirathi Neotia Woman And Child Care Centre,22.5474203,88.3592599,False,False,2,10,6,45,0.9,4.8
+31,Rama Krishna Mission Seva Pratisthan,22.5234205,88.3519824,False,False,1,9,8,71,0.93,3.5
+32,Ramakrishna Sarada Mission Matri Bhavan,22.5137804,88.34363,False,True,1,9,7,81,0.84,3.9
+33,Harvard Medicare And Research Institute,22.542529,88.3651547,False,False,4,8,9,119,0.67,3.7
+34,Life Line Diagnostic Centre And Nursing Home,22.5477696,88.3542247,True,False,3,6,7,64,0.87,3.9
+35,Phoenix Hospital And Diagnostic Centre,22.6468547,88.4322274,False,False,4,14,3,82,0.78,4.0
+36,Swastik Seva Sadan,22.5347322,88.3743808,False,True,1,12,9,133,0.8,4.4
+37,Panihati State General Hospital,22.6929042,88.3980869,False,False,2,12,7,69,0.66,4.7
+38,Nightingale Hospital,22.546022,88.3515425,False,False,1,7,3,47,0.73,4.4
+39,Eskag Sanjeevani Hospital,22.6040075,88.3678195,True,True,7,13,12,141,0.83,4.2
+40,Fortis Healthcare Kolkata,22.5181685,88.3559132,False,True,3,9,4,104,0.77,4.4
+41,Institute Of Child Health,22.5386694,88.3723074,False,True,1,9,5,110,0.85,4.4
+42,Zenith Super Specialist Hospital,22.6630636,88.3780661,True,True,5,14,6,120,0.87,3.4
+43,B.N Basu Memorial Clinic,22.5165078,88.3530888,False,True,1,13,8,97,0.7,4.1
+44,Islamia Medical Institute,22.5427124,88.3664475,False,True,1,6,3,41,0.7,4.2
+45,Islamia Hospital,22.5447604,88.3708055,False,False,1,5,6,46,0.84,3.7
+46,Sahid Khudiram Bose Hospital,22.6631818,88.3771062,False,False,1,12,3,84,0.67,4.4
+47,Uttarpara State General Hospital,22.663208,88.3435006,True,True,2,13,5,107,0.87,4.1
+48,DM Hospitals,22.4660881,88.3105063,True,False,1,12,3,119,0.69,3.7
+49,Shradha Health Care,22.5086023,88.3380973,False,True,3,18,9,111,0.92,4.7
+50,People Meditreat,22.58174,88.3232278,True,True,1,8,5,49,0.68,4.2
