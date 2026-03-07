@@ -9,7 +9,7 @@ export interface Location {
 export const findHospitalsInRadius = async (userLoc: Location, radiusKm: number = 10) => {
   const allHospitals = await db.select().from(hospitals);
   
-  return allHospitals.filter(hospital => {
+  return allHospitals.filter((hospital) => {
     const distance = calculateDistance(
       userLoc.latitude,
       userLoc.longitude,

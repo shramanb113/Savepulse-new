@@ -10,7 +10,9 @@ import hospitalsRouter from "./routes/hospitals";
 export const createServer = () => {
   const app = express();
 
-  app.use(cors());
+  app.use(cors({
+    origin: "http://localhost:3000",
+  }));
   app.use(express.json());
 
   // health check
