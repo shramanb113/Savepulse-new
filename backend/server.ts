@@ -6,6 +6,11 @@ dotenv.config();
 
 import emergencyRouter from "./routes/emergency";
 import hospitalsRouter from "./routes/hospitals";
+import userSignup from "./routes/user/userSignup";
+import userLogin from "./routes/user/userLogin";
+import hospitalSignup from "./routes/hospital/hospitalSignup";
+import hospitalLogin from "./routes/hospital/hospitalLogin";
+import getUserData from "./routes/user/data";
 
 export const createServer = () => {
   const app = express();
@@ -19,6 +24,12 @@ export const createServer = () => {
   app.get("/health", (_req, res) => {
     res.json({ status: "ok" });
   });
+
+  app.get("/user/signup", userSignup);
+  app.get("/user/login", userLogin);
+  app.get("/hospital/signup", hospitalSignup);
+  app.get("/hospital/login", hospitalLogin);
+  app.get("/user/data", getUserData);
 
   // routes
   app.use("/api/emergency", emergencyRouter);

@@ -3,7 +3,7 @@
 import { useState,useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
-import SOSButton from "@/components/SOSButton";
+import SOSButton from "@/components/SosButton";
 import EmergencyTypeCard from "@/components/EmergencyTypeCard";
 import BottomNav from "@/components/BottomNav";
 import { emergencyTypes } from "@/data/emergencyTypes";
@@ -11,37 +11,9 @@ import { emergencyTypes } from "@/data/emergencyTypes";
 export default function Home() {
   const router = useRouter();
   const [selectedType, setSelectedType] = useState<string | null>(null);
-  const user_id = crypto.randomUUID();
 
-  useEffect(()=>{
-    localStorage.setItem("userID",user_id);
-    navigator.geolocation.getCurrentPosition((position) => {
-    const lat = position.coords.latitude;
-    const lng = position.coords.longitude;
 
-    localStorage.setItem("latitude",JSON.stringify(lat));
-    localStorage.setItem("longitude",JSON.stringify(lng));
 
-    const user_id = localStorage.getItem("userID");
-    const latitude = localStorage.getItem("latitude");
-    const longitude = localStorage.getItem("longitude");
-    fetch("http://localhost:3001/dashboard", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      user_id: user_id,
-      latitude: latitude,
-      longitude: longitude,
-    })
-  })
-  .then(res => res.json())
-  .then(data => console.log(data));
-  });
-  },[])
-
-  
 
   function handleSOS() {
     const query = selectedType ? `?type=${selectedType}` : "";
