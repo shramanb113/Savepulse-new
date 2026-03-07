@@ -1,20 +1,91 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
 import BottomNav from "@/components/BottomNav";
 
-const mockUser = {
-  name: "Alex Johnson",
-  phone: "+1 (555) 234-5678",
-  bloodType: "O+",
-  dateOfBirth: "1985-06-15",
-  allergies: ["Penicillin", "Latex"],
-  conditions: ["Hypertension", "Type 2 Diabetes"],
-  emergencyContacts: [
-    { name: "Sarah Johnson", relation: "Spouse", phone: "+1 (555) 234-8765" },
-    { name: "Mike Johnson", relation: "Brother", phone: "+1 (555) 345-6789" },
-  ],
-};
+interface UserProfile {
+  id: string;
+  name: string;
+  email: string;
+  phone: string | null;
+  address: string | null;
+  bloodGroup: string | null;
+  emergencyContact: string | null;
+  createdAt: string;
+}
 
 export default function ProfilePage() {
+  const router = useRouter();
+  const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchProfile() {
+      try {
+        const res = await fetch("http://localhost:3001/user/profile", {
+          credentials: "include",
+        });
+
+        if (res.status === 401) {
+          router.push("/userLogin");
+          return;
+        }
+
+        if (!res.ok) {
+          setError("Failed to load profile.");
+          return;
+        }
+
+        const data: UserProfile = await res.json();
+        setProfile(data);
+      } catch {
+        setError("Unable to connect to server.");
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchProfile();
+  }, [router]);
+
+  if (loading) {
+    return (
+      <div className="flex min-h-screen flex-col bg-gray-50 dark:bg-slate-950">
+        <Header title="My Profile" showBack={false} />
+        <main className="mx-auto flex w-full max-w-md flex-1 items-center justify-center">
+          <div className="flex flex-col items-center gap-3">
+            <div className="h-10 w-10 animate-spin rounded-full border-4 border-red-600 border-t-transparent" />
+            <p className="text-sm text-gray-500 dark:text-slate-400">Loading profile…</p>
+          </div>
+        </main>
+        <BottomNav />
+      </div>
+    );
+  }
+
+  if (error || !profile) {
+    return (
+      <div className="flex min-h-screen flex-col bg-gray-50 dark:bg-slate-950">
+        <Header title="My Profile" showBack={false} />
+        <main className="mx-auto flex w-full max-w-md flex-1 items-center justify-center px-4">
+          <div className="text-center">
+            <p className="text-lg font-semibold text-gray-900 dark:text-white">😔 {error}</p>
+            <button
+              onClick={() => router.push("/userLogin")}
+              className="mt-4 rounded-xl bg-red-600 px-6 py-3 text-sm font-bold text-white hover:bg-red-500"
+            >
+              Go to Login
+            </button>
+          </div>
+        </main>
+        <BottomNav />
+      </div>
+    );
+  }
+
   return (
     <div className="flex min-h-screen flex-col bg-gray-50 dark:bg-slate-950">
       <Header title="My Profile" showBack={false} />
@@ -27,8 +98,8 @@ export default function ProfilePage() {
               <p className="text-xs font-semibold uppercase tracking-widest opacity-80">
                 Medical ID
               </p>
-              <h2 className="mt-1 text-2xl font-extrabold">{mockUser.name}</h2>
-              <p className="mt-0.5 text-sm opacity-90">{mockUser.phone}</p>
+              <h2 className="mt-1 text-2xl font-extrabold">{profile.name}</h2>
+              <p className="mt-0.5 text-sm opacity-90">{profile.email}</p>
             </div>
             <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/20 text-3xl backdrop-blur">
               🩺
@@ -38,99 +109,51 @@ export default function ProfilePage() {
           <div className="mt-5 grid grid-cols-3 gap-3">
             <div className="rounded-2xl bg-white/20 p-3 text-center backdrop-blur">
               <p className="text-xs opacity-80">Blood Type</p>
-              <p className="mt-0.5 text-xl font-extrabold">{mockUser.bloodType}</p>
+              <p className="mt-0.5 text-xl font-extrabold">{profile.bloodGroup || "—"}</p>
             </div>
             <div className="rounded-2xl bg-white/20 p-3 text-center backdrop-blur">
-              <p className="text-xs opacity-80">DOB</p>
+              <p className="text-xs opacity-80">Phone</p>
+              <p className="mt-0.5 text-sm font-bold">{profile.phone || "—"}</p>
+            </div>
+            <div className="rounded-2xl bg-white/20 p-3 text-center backdrop-blur">
+              <p className="text-xs opacity-80">Member Since</p>
               <p className="mt-0.5 text-sm font-bold">
-                {new Date(mockUser.dateOfBirth).toLocaleDateString("en-US", {
+                {new Date(profile.createdAt).toLocaleDateString("en-US", {
                   month: "short",
-                  day: "numeric",
                   year: "numeric",
                 })}
               </p>
             </div>
-            <div className="rounded-2xl bg-white/20 p-3 text-center backdrop-blur">
-              <p className="text-xs opacity-80">Allergies</p>
-              <p className="mt-0.5 text-sm font-bold">{mockUser.allergies.length}</p>
+          </div>
+        </div>
+
+        {/* Address */}
+        <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800">
+          <h3 className="font-semibold text-gray-900 dark:text-white">📍 Address</h3>
+          <p className="mt-2 text-sm text-gray-700 dark:text-slate-300">
+            {profile.address || "No address on file"}
+          </p>
+        </div>
+
+        {/* Emergency Contact */}
+        <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800">
+          <h3 className="font-semibold text-gray-900 dark:text-white">🚨 Emergency Contact</h3>
+          {profile.emergencyContact ? (
+            <div className="mt-3 flex items-center justify-between">
+              <p className="text-sm text-gray-700 dark:text-slate-300">{profile.emergencyContact}</p>
+              <a
+                href={`tel:${profile.emergencyContact}`}
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-green-100 text-green-600 hover:bg-green-200 dark:bg-green-900/40 dark:text-green-400 dark:hover:bg-green-900/60"
+                aria-label="Call emergency contact"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+              </a>
             </div>
-          </div>
-        </div>
-
-        {/* Allergies */}
-        <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800">
-          <h3 className="font-semibold text-gray-900 dark:text-white">
-            Allergies
-          </h3>
-          <div className="mt-2 flex flex-wrap gap-2">
-            {mockUser.allergies.map((allergy) => (
-              <span
-                key={allergy}
-                className="rounded-full bg-red-100 px-3 py-1 text-sm font-medium text-red-700 dark:bg-red-900/40 dark:text-red-300"
-              >
-                ⚠️ {allergy}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        {/* Medical Conditions */}
-        <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800">
-          <h3 className="font-semibold text-gray-900 dark:text-white">
-            Medical Conditions
-          </h3>
-          <div className="mt-2 flex flex-col gap-2">
-            {mockUser.conditions.map((condition) => (
-              <div
-                key={condition}
-                className="flex items-center gap-2 text-sm text-gray-700 dark:text-slate-300"
-              >
-                <span className="h-2 w-2 rounded-full bg-blue-500" />
-                {condition}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Emergency Contacts */}
-        <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-700 dark:bg-slate-800">
-          <h3 className="font-semibold text-gray-900 dark:text-white">
-            Emergency Contacts
-          </h3>
-          <div className="mt-3 flex flex-col gap-3">
-            {mockUser.emergencyContacts.map((contact) => (
-              <div key={contact.phone} className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium text-gray-900 dark:text-white">
-                    {contact.name}
-                  </p>
-                  <p className="text-sm text-gray-500 dark:text-slate-400">
-                    {contact.relation} · {contact.phone}
-                  </p>
-                </div>
-                <a
-                  href={`tel:${contact.phone}`}
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-green-100 text-green-600 hover:bg-green-200 dark:bg-green-900/40 dark:text-green-400 dark:hover:bg-green-900/60"
-                  aria-label={`Call ${contact.name}`}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                    />
-                  </svg>
-                </a>
-              </div>
-            ))}
-          </div>
+          ) : (
+            <p className="mt-2 text-sm text-gray-500 dark:text-slate-400">Not set</p>
+          )}
         </div>
 
         {/* Edit button */}
