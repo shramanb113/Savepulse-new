@@ -5,7 +5,7 @@ import numpy as np
 import os
 
 from .features import (
-    compute_distance_score,
+    get_osrm_distances,
     compute_availability,
     compute_rating,
     compute_facility,
@@ -52,26 +52,26 @@ def get_hospitals():
 
 
 def build_feature_matrix(hospitals, req):
-    features = []
     emergency = req["emergency_type"]
 
-    for _, row in hospitals.iterrows():
-        distance = compute_distance_score(
-            req["latitude"], req["longitude"],
-            row["latitude"], row["longitude"]
-        )
+    # OSRM first, Haversine as fallback (handled inside get_osrm_distances)
+    distances = get_osrm_distances(req["latitude"], req["longitude"], hospitals)
+
+    features = []
+    for i, (_, row) in enumerate(hospitals.iterrows()):
+        distance_score = 1 / (1 + distances[i])
         availability = compute_availability(row)
         rating = compute_rating(row)
-        facility = compute_facility(row, emergency)  # 0 or 1 — varies now since no pre-filter
+        facility = compute_facility(row, emergency)
 
-        features.append([distance, availability, rating, facility])
+        features.append([distance_score, availability, rating, facility])
 
     return np.array(features)
 
 
 def recommend(request_id):
     req = get_request(request_id)
-    hospitals = get_hospitals()  # NO filtering — all hospitals included
+    hospitals = get_hospitals()
 
     if hospitals.empty:
         return pd.DataFrame()
@@ -80,6 +80,7 @@ def recommend(request_id):
     weights = compute_weights(feature_matrix)
     scores = compute_scores(feature_matrix, weights)
 
+    hospitals = hospitals.copy()
     hospitals["score"] = scores
     ranked = hospitals.sort_values("score", ascending=False)
 
