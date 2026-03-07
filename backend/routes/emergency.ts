@@ -25,6 +25,10 @@ router.post("/", async (req, res) => {
       status: "pending",
     }).returning();
 
+    if (!newRequest) {
+      return res.status(500).json({ error: "Failed to create emergency request" });
+    }
+
     const requestId = newRequest.request_id;
 
     // 2. Call Python recommender using Bun.spawn

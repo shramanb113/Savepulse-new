@@ -6,7 +6,10 @@ import {
   boolean,
   timestamp,
   pgSchema,
+  pgEnum,
 } from "drizzle-orm/pg-core";
+
+export const roleEnum = pgEnum("role", ["user", "hospital", "admin"]);
 
 export const mySchema = pgSchema("my_schema");
 
@@ -47,4 +50,29 @@ export const requests = mySchema.table("requests", {
   assigned_hospital_id: integer("assigned_hospital_id"),
 
   status: text("status").default("pending"),
+});
+
+
+
+
+export const user = mySchema.table("user", {
+  id: text("id").primaryKey(),
+
+  name: text("name").notNull(),
+
+  email: text("email").notNull().unique(),
+
+  phone_number: text("phone_number"),
+
+  role: roleEnum("role").default("user").notNull(),
+
+  emailVerified: boolean("email_verified").default(false).notNull(),
+
+
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+
+  updatedAt: timestamp("updated_at")
+    .defaultNow()
+    .$onUpdate(() => new Date())
+    .notNull(),
 });

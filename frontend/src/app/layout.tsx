@@ -5,7 +5,8 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "SavePulse - Emergency Ambulance Service",
-  description: "Emergency ambulance service with intelligent hospital recommendations",
+  description:
+    "Emergency ambulance service with intelligent hospital recommendations",
 };
 
 export default function RootLayout({
