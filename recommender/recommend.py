@@ -102,7 +102,7 @@ def recommend(request_id):
 if __name__ == "__main__":
 
     if len(sys.argv) < 2:
-        print("Usage: python recommend.py <request_id>")
+        print("Usage: python -m recommender.recommend <request_id>")
         sys.exit(1)
 
     request_id = int(sys.argv[1])
