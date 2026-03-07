@@ -1,48 +1,77 @@
 import jwt from "jsonwebtoken";
 import { Request, Response } from "express";
-import { db } from "../../db/db"; // your Drizzle DB instance
-import { hospitals, user } from "../../schema/schema"; // your tables
+import { db } from "../../db/db"; 
+import { hospitals } from "../../schema/schema"; 
 import { eq } from "drizzle-orm";
 
 export default async function hospitalSignup(req: Request, res: Response) {
   try {
-    const { id, email, hospitalName } = req.body;
+    const { 
+      hospital_name, 
+      email, 
+      latitude, 
+      longitude, 
+      trauma_center, 
+      cardiac_center, 
+      icu_beds_available, 
+      general_beds_available, 
+      oxygen_beds_available,
+      total_beds 
+    } = req.body;
 
-    if (!email || !hospitalName) {
-      return res.status(400).json({ message: "email and hospitalName are required" });
-    }
-
-    // Check if hospital exists by email in the hospitals table
-    // Note: The schema uses 'hospital_id' (serial) and doesn't have an 'email' field.
-    // However, the 'user' table has 'email' and 'role'.
-    // For now, I'll insert into 'hospitals' and 'user' if needed, or follow the code's intent.
-    // The code was using 'hospitals' table, so I'll stick to that but use correct fields.
-    
-    const existingHospital = await db
-      .select()
-      .from(hospitals)
-      .where(eq(hospitals.hospital_name, hospitalName));
-
-    if (existingHospital.length === 0) {
-      await db.insert(hospitals).values({
-        hospital_name: hospitalName,
-        latitude: hospitalName.latitude, // Should be provided by frontend
-        longitude: hospitalName.longitude, // Should be provided by frontend
-        total_beds: req.body.beds ? parseInt(req.body.beds) : 0,
+    // 1. Validation
+    if (!email || !hospital_name || latitude === undefined || longitude === undefined) {
+      return res.status(400).json({ 
+        message: "Missing required fields: email, hospital_name, and location coordinates are mandatory." 
       });
     }
 
+    // 2. Check for existing hospital (using name as a unique check based on your logic)
+    const existingHospital = await db
+      .select()
+      .from(hospitals)
+      .where(eq(hospitals.hospital_name, hospital_name))
+      .limit(1);
+
+    if (existingHospital.length > 0) {
+      return res.status(409).json({ message: "A hospital with this name is already registered." });
+    }
+
+    // 3. Insert into Drizzle DB
+    // hospital_id is 'serial', so it auto-generates
+    const [newHospital] = await db.insert(hospitals).values({
+      hospital_name: hospital_name,
+      latitude: parseFloat(latitude),
+      longitude: parseFloat(longitude),
+      trauma_center: Boolean(trauma_center),
+      cardiac_center: Boolean(cardiac_center),
+      icu_beds_available: Number(icu_beds_available) || 0,
+      general_beds_available: Number(general_beds_available) || 0,
+      oxygen_beds_available: Number(oxygen_beds_available) || 0,
+      total_beds: Number(total_beds) || 0,
+    }).returning();
+
+    // 4. Generate JWT
     const token = jwt.sign(
-      { email, hospitalName },
+      { 
+        hospitalId: newHospital.hospital_id, 
+        email, 
+        role: "hospital" 
+      },
       process.env.JWT_SECRET!,
       { expiresIn: "7d" }
     );
 
-
+    // 5. Response
     res.setHeader("Authorization", `Bearer ${token}`);
-    return res.status(201).json({ token });
+    return res.status(201).json({ 
+      message: "Hospital registered successfully",
+      token,
+      hospitalId: newHospital.hospital_id 
+    });
+
   } catch (err: any) {
     console.error("Signup error:", err);
-    return res.status(500).json({ message: "Internal server error" });
+    return res.status(500).json({ message: "Internal server error", error: err.message });
   }
 }
