@@ -272,6 +272,7 @@ body {
 .alert-card.severity-1 { border-left-color: var(--red); }
 .alert-card.severity-2 { border-left-color: var(--amber); }
 .alert-card.severity-3 { border-left-color: var(--blue); }
+.alert-card.dispatched { border-left-color: var(--red); }
 .alert-card.accepted { border-left-color: var(--green); opacity: 0.6; }
 .alert-card.declined { opacity: 0.35; filter: grayscale(0.5); }
 

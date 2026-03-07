@@ -27,7 +27,7 @@ export default function HospitalLogin() {
             const data = await res.json();
 
             if (res.ok) {
-                router.push("/dashboard");
+                router.push("/emergency_dashboard_hospital");
             } else {
                 setError(data.message ?? "Login failed. Please try again.");
             }

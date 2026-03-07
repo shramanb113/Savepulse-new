@@ -22,7 +22,7 @@ const SEVERITY_COLORS: Record<number, string> = {
 };
 
 export default function EmergencyDetailModal({ alert, onClose, onAccept, onDecline }: Props) {
-  const isPending = alert.status === "pending";
+  const isPending = alert.status === "pending" || alert.status === "dispatched";
   const severityLabel = SEVERITY_LABELS[alert.severity_level];
 
   return (

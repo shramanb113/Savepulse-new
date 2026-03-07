@@ -24,7 +24,7 @@ const SEVERITY_LABELS: Record<number, string> = {
 };
 
 export default function SOSAlertCard({ alert, isNew, onAccept, onDecline, onViewDetails }: Props) {
-    const isPending = alert.status === "pending";
+    const isPending = alert.status === "pending" || alert.status === "dispatched";
 
     const severityClass =
         alert.status === "accepted"
@@ -36,6 +36,7 @@ export default function SOSAlertCard({ alert, isNew, onAccept, onDecline, onView
     const cardClass = [
         "alert-card",
         isPending ? `severity-${alert.severity_level}` : alert.status,
+        alert.status === "dispatched" ? "dispatched" : "",
         isNew ? "new-incoming" : "",
     ]
         .filter(Boolean)

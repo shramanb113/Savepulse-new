@@ -16,6 +16,8 @@ import hospitalLogin from "./routes/hospital/hospitalLogin";
 import getUserData from "./routes/user/data";
 import getUserProfile from "./routes/user/userProfile";
 import getHospitalProfile from "./routes/hospital/hospitalProfile";
+import { getHospitalRequests, acceptRequest, declineRequest } from "./routes/hospital/hospitalRequests";
+import { updateBedCount } from "./routes/hospital/hospitalBeds";
 
 export const createServer = () => {
   const app = express();
@@ -44,6 +46,10 @@ export const createServer = () => {
 
   // ── Protected hospital routes ──
   app.get("/hospital/profile", authenticateHospital, getHospitalProfile);
+  app.get("/hospital/requests", authenticateHospital, getHospitalRequests);
+  app.post("/hospital/requests/:requestId/accept", authenticateHospital, acceptRequest);
+  app.post("/hospital/requests/:requestId/decline", authenticateHospital, declineRequest);
+  app.patch("/hospital/beds", authenticateHospital, updateBedCount);
 
   // ── API routes ──
   app.use("/api/emergency", emergencyRouter);

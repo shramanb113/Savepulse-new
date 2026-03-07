@@ -14,6 +14,11 @@ interface UserProfile {
   bloodGroup: string | null;
   emergencyContact: string | null;
   createdAt: string;
+  activeEmergency: {
+    id: number;
+    status: string;
+    hospitalName: string | null;
+  } | null;
 }
 
 export default function ProfilePage() {
@@ -91,6 +96,37 @@ export default function ProfilePage() {
       <Header title="My Profile" showBack={false} />
 
       <main className="mx-auto flex w-full max-w-md flex-1 flex-col gap-5 px-4 pb-28 pt-6">
+        {/* Active Emergency Banner */}
+        {profile.activeEmergency && (
+          <div className={`rounded-2xl p-4 shadow-lg border-2 animate-pulse ${profile.activeEmergency.status === "accepted"
+              ? "bg-green-600/10 border-green-500 text-green-700 dark:text-green-400"
+              : "bg-red-600/10 border-red-500 text-red-700 dark:text-red-400"
+            }`}>
+            <div className="flex items-center gap-3">
+              <span className="text-2xl">
+                {profile.activeEmergency.status === "accepted" ? "✅" : "🚨"}
+              </span>
+              <div className="flex-1">
+                <p className="text-xs font-black uppercase tracking-widest opacity-70">
+                  Active Emergency
+                </p>
+                <p className="text-sm font-bold leading-tight">
+                  {profile.activeEmergency.status === "accepted"
+                    ? `AMBULANCE ACCEPTED — ${profile.activeEmergency.hospitalName || "Hospital"} is on the way!`
+                    : "Waiting for Hospital Confirmation..."}
+                </p>
+              </div>
+              <button
+                onClick={() => router.push("/emergency")}
+                className="rounded-lg bg-current px-3 py-1.5 text-[10px] font-black uppercase tracking-tighter text-white"
+                style={{ backgroundColor: profile.activeEmergency.status === "accepted" ? "#10b981" : "#ef4444" }}
+              >
+                Track
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* Medical ID Card */}
         <div className="rounded-3xl bg-gradient-to-br from-red-600 to-red-500 p-6 text-white shadow-lg">
           <div className="flex items-start justify-between">
