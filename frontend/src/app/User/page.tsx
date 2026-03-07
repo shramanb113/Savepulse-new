@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
-import SOSButton from "@/components/SOSButton";
+import SOSButton from "@/components/SosButton";
 import EmergencyTypeCard from "@/components/EmergencyTypeCard";
 import BottomNav from "@/components/BottomNav";
 import { emergencyTypes } from "@/data/emergencyTypes";
@@ -11,10 +11,40 @@ import { emergencyTypes } from "@/data/emergencyTypes";
 export default function Home() {
   const router = useRouter();
   const [selectedType, setSelectedType] = useState<string | null>(null);
-  const [severity, setSeverity] = useState<number>(3); // Default to medium (1-5)
+  const [severity, setSeverity] = useState<number>(3);
   const [location, setLocation] = useState<{ lat: number; lng: number } | null>(null);
+  const [userId, setUserId] = useState<string | null>(null);
+  const [authChecked, setAuthChecked] = useState(false);
 
-  // Auto-detect location on mount for the indicator
+  // Auth check on mount — redirect to login if not authenticated
+  useEffect(() => {
+    async function checkAuth() {
+      try {
+        const res = await fetch("http://localhost:3001/user/data", {
+          credentials: "include",
+        });
+
+        if (res.status === 401) {
+          router.push("/login");
+          return;
+        }
+
+        if (res.ok) {
+          const data = await res.json();
+          setUserId(data.userId);
+          setAuthChecked(true);
+        } else {
+          router.push("/login");
+        }
+      } catch {
+        router.push("/login");
+      }
+    }
+
+    checkAuth();
+  }, [router]);
+
+  // Auto-detect location on mount
   useEffect(() => {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((pos) => {
@@ -29,21 +59,18 @@ export default function Home() {
       return;
     }
 
-    // Get fresh location at moment of click
     navigator.geolocation.getCurrentPosition(async (pos) => {
-      const payload = {
-        user_id: "user_guest_123", // Replace with actual auth user ID
-        latitude: pos.coords.latitude,
-        longitude: pos.coords.longitude,
-        emergency_type: selectedType,
-        severity_level: severity,
-      };
-
       try {
-        const res = await fetch("http://localhost:3001/api/sos", {
+        const res = await fetch("http://localhost:3001/api/emergency", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
+          credentials: "include",
+          body: JSON.stringify({
+            latitude: pos.coords.latitude,
+            longitude: pos.coords.longitude,
+            emergencyType: selectedType,
+            severity_level: severity,
+          }),
         });
 
         if (res.ok) {
@@ -53,6 +80,16 @@ export default function Home() {
         console.error("SOS Request Failed", err);
       }
     });
+  }
+
+  // Show loading while checking auth
+  if (!authChecked) {
+    return (
+      <div className="flex min-h-screen flex-col items-center justify-center bg-gray-50 dark:bg-slate-950">
+        <div className="h-10 w-10 animate-spin rounded-full border-4 border-red-600 border-t-transparent" />
+        <p className="mt-3 text-sm text-gray-500 dark:text-slate-400">Loading…</p>
+      </div>
+    );
   }
 
   return (
@@ -89,7 +126,7 @@ export default function Home() {
           </p>
         </section>
 
-        {/* Severity Slider (New Section based on Schema) */}
+        {/* Severity Slider */}
         <section className="rounded-2xl bg-white p-4 shadow-sm dark:bg-slate-900">
           <div className="flex justify-between">
             <h2 className="text-sm font-semibold uppercase tracking-wide text-gray-500 dark:text-slate-400">

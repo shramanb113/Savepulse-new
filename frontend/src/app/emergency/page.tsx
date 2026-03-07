@@ -42,11 +42,11 @@ function HospitalsPageContent() {
             const response = await fetch("http://localhost:3001/api/emergency", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
+              credentials: "include",
               body: JSON.stringify({
                 latitude,
                 longitude,
                 emergencyType: typeId,
-                userId: "user_123" // Placeholder
               }),
             });
 

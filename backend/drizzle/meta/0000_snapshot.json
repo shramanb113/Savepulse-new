@@ -1,5 +1,5 @@
 {
-  "id": "52b416e8-9f91-4baa-b507-0f0efa02819c",
+  "id": "94221248-da9e-4af0-9116-39f57f62de23",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -187,6 +187,24 @@
         },
         "phone_number": {
           "name": "phone_number",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "address": {
+          "name": "address",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "blood_group": {
+          "name": "blood_group",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "emergency_contact": {
+          "name": "emergency_contact",
           "type": "text",
           "primaryKey": false,
           "notNull": false

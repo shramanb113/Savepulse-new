@@ -33,6 +33,9 @@ CREATE TABLE "my_schema"."user" (
 	"name" text NOT NULL,
 	"email" text NOT NULL,
 	"phone_number" text,
+	"address" text,
+	"blood_group" text,
+	"emergency_contact" text,
 	"created_at" timestamp DEFAULT now() NOT NULL,
 	"updated_at" timestamp DEFAULT now() NOT NULL,
 	CONSTRAINT "user_email_unique" UNIQUE("email")
