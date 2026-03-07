@@ -26,15 +26,18 @@ def get_connection():
 conn = get_connection()
 
 def get_request(request_id):
-
     query = """
     SELECT *
     FROM my_schema.requests
     WHERE request_id = %s
     """
 
-    return pd.read_sql(query, conn, params=(request_id,)).iloc[0]
-
+    result = pd.read_sql(query, conn, params=(request_id,))
+    
+    if result.empty:
+        raise ValueError(f"No request found for request_id: {request_id}")
+    
+    return result.iloc[0]
 
 def get_hospitals():
 
@@ -80,24 +83,18 @@ def build_feature_matrix(hospitals, req):
 
 
 def recommend(request_id):
-
     req = get_request(request_id)
-
     hospitals = get_hospitals()
-
     hospitals = filter_hospitals(hospitals, req["emergency_type"]).copy()
     
     if hospitals.empty:
-        return []
+        return pd.DataFrame()  # Return an empty DataFrame if no hospitals match
 
     feature_matrix = build_feature_matrix(hospitals, req)
-
     weights = compute_weights(feature_matrix)
-
     scores = compute_scores(feature_matrix, weights)
 
     hospitals["score"] = scores
-
     ranked = hospitals.sort_values("score", ascending=False)
 
     return ranked[["hospital_id", "hospital_name", "score"]].head(5)
