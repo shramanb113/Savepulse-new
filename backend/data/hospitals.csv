@@ -1,51 +1,51 @@
 hospital_id,hospital_name,latitude,longitude,trauma_center,cardiac_center,icu_beds_available,general_beds_available,oxygen_beds_available,total_beds,current_occupancy_rate,hospital_rating
-1,Eden Hospital,22.5727398,88.3600196,True,True,1,17,3,90,0.9,4.0
-2,Calcutta Medical College & Hospital,22.5722242,88.3614363,False,False,2,11,3,95,0.88,3.4
-3,Vidyasagar State General Hospital,22.4987178,88.3163322,True,True,3,9,3,44,0.7,3.8
-4,Anandalok Hospital,22.5843732,88.4289579,False,True,2,7,4,70,0.77,3.9
-5,Hindustan Health Point,22.4580817,88.3836982,True,True,1,22,8,122,0.69,4.3
-6,Peerless Hospital,22.4809641,88.3938205,False,False,6,11,5,147,0.91,3.5
-7,Bidhannagar State General Hospital,22.5912273,88.4110886,True,True,1,7,14,144,0.69,4.3
-8,Seba Hospital,22.5908731,88.4105441,True,False,3,5,8,73,0.82,3.6
-9,Bidhannagar Sub-Divisional Hospital,22.5907911,88.410894,False,True,2,5,3,44,0.82,4.1
-10,Global Healthcare System,22.5855232,88.4914262,True,False,8,22,23,278,0.75,4.0
-11,Chittaranjan Shishu Hospital,22.5264408,88.3471209,True,True,2,28,9,143,0.88,4.7
-12,Chittaranjan Seva Sadan,22.5259264,88.3470069,False,True,5,8,14,149,0.73,4.4
-13,Chittaranjan National Cancer Institute,22.5252694,88.3466423,True,False,7,18,14,144,0.78,3.8
-14,Institute Of Neurosciences Kolkata,22.5470227,88.3620613,False,False,3,24,10,129,0.76,3.5
-15,ESI Hospital Sealdah,22.5728574,88.3730073,False,False,1,7,3,85,0.9,4.5
-16,Chandi Tala Health Center,22.4866272,88.3460553,False,True,4,15,9,167,0.92,3.8
-17,Behala Balananda Brahmachari Hospital,22.5065586,88.3205755,False,True,8,41,6,209,0.72,4.4
-18,IRIS Hospital,22.4792072,88.375858,True,True,5,12,4,104,0.77,3.9
-19,Red Plus Society Nursing Home,22.4831664,88.3850406,False,False,3,14,6,95,0.67,3.6
-20,Paramount Nursing Home,22.5239877,88.3486944,False,False,1,11,7,71,0.74,4.7
-21,NRS Medical College & Hospital,22.5652972,88.3691544,True,True,2,15,10,103,0.88,4.0
-22,UNB Building NRS Medical College,22.5648794,88.3695623,False,True,6,5,6,146,0.88,4.7
-23,Tarulia Upashasthya Kendra,22.5878701,88.4423075,True,False,3,5,4,42,0.83,3.6
-24,North Dum Dum Municipality Hospital,22.6609462,88.4355111,True,False,2,7,8,110,0.93,4.8
-25,Remedy Hospital,22.4652784,88.3898123,True,True,1,9,7,70,0.75,4.1
-26,Re-Life Hospital,22.6845585,88.3544138,False,False,14,45,20,288,0.71,3.9
-27,New Town Nursing Home,22.6149976,88.4321695,False,False,3,10,3,129,0.84,3.9
-28,The May Fair Hospital,22.624456,88.3785443,False,True,2,9,7,45,0.69,4.2
-29,Rameswara Nursing Home,22.5900155,88.3929551,False,True,6,16,11,126,0.69,3.8
-30,Bhagirathi Neotia Woman And Child Care Centre,22.5474203,88.3592599,False,False,2,10,6,45,0.9,4.8
-31,Rama Krishna Mission Seva Pratisthan,22.5234205,88.3519824,False,False,1,9,8,71,0.93,3.5
-32,Ramakrishna Sarada Mission Matri Bhavan,22.5137804,88.34363,False,True,1,9,7,81,0.84,3.9
-33,Harvard Medicare And Research Institute,22.542529,88.3651547,False,False,4,8,9,119,0.67,3.7
-34,Life Line Diagnostic Centre And Nursing Home,22.5477696,88.3542247,True,False,3,6,7,64,0.87,3.9
-35,Phoenix Hospital And Diagnostic Centre,22.6468547,88.4322274,False,False,4,14,3,82,0.78,4.0
-36,Swastik Seva Sadan,22.5347322,88.3743808,False,True,1,12,9,133,0.8,4.4
-37,Panihati State General Hospital,22.6929042,88.3980869,False,False,2,12,7,69,0.66,4.7
-38,Nightingale Hospital,22.546022,88.3515425,False,False,1,7,3,47,0.73,4.4
-39,Eskag Sanjeevani Hospital,22.6040075,88.3678195,True,True,7,13,12,141,0.83,4.2
-40,Fortis Healthcare Kolkata,22.5181685,88.3559132,False,True,3,9,4,104,0.77,4.4
-41,Institute Of Child Health,22.5386694,88.3723074,False,True,1,9,5,110,0.85,4.4
-42,Zenith Super Specialist Hospital,22.6630636,88.3780661,True,True,5,14,6,120,0.87,3.4
-43,B.N Basu Memorial Clinic,22.5165078,88.3530888,False,True,1,13,8,97,0.7,4.1
-44,Islamia Medical Institute,22.5427124,88.3664475,False,True,1,6,3,41,0.7,4.2
-45,Islamia Hospital,22.5447604,88.3708055,False,False,1,5,6,46,0.84,3.7
-46,Sahid Khudiram Bose Hospital,22.6631818,88.3771062,False,False,1,12,3,84,0.67,4.4
-47,Uttarpara State General Hospital,22.663208,88.3435006,True,True,2,13,5,107,0.87,4.1
-48,DM Hospitals,22.4660881,88.3105063,True,False,1,12,3,119,0.69,3.7
-49,Shradha Health Care,22.5086023,88.3380973,False,True,3,18,9,111,0.92,4.7
-50,People Meditreat,22.58174,88.3232278,True,True,1,8,5,49,0.68,4.2
+1,Eden Hospital,22.5727398,88.3600196,True,True,7,30,8,95,0.73,4.0
+2,Calcutta Medical College & Hospital,22.5722242,88.3614363,True,True,17,134,21,530,0.81,3.9
+3,Vidyasagar State General Hospital,22.4987178,88.3163322,True,True,13,52,23,262,0.79,3.4
+4,Anandalok Hospital,22.5843732,88.4289579,True,True,9,36,9,99,0.6,4.1
+5,Hindustan Health Point,22.4580817,88.3836982,True,True,9,21,10,148,0.7,4.2
+6,Peerless Hospital,22.4809641,88.3938205,False,True,15,74,13,393,0.67,4.2
+7,Bidhannagar State General Hospital,22.5912273,88.4110886,True,False,14,52,12,173,0.83,3.8
+8,Seba Hospital,22.5908731,88.4105441,True,True,4,39,9,176,0.71,3.7
+9,Bidhannagar Sub-Divisional Hospital,22.5907911,88.410894,True,False,10,53,18,509,0.89,3.7
+10,Global Healthcare System,22.5855232,88.4914262,True,True,5,44,11,129,0.8,4.0
+11,Chittaranjan Shishu Hospital,22.5264408,88.3471209,False,False,3,41,10,187,0.7,3.8
+12,Chittaranjan Seva Sadan,22.5259264,88.3470069,True,False,9,32,6,114,0.78,3.9
+13,Chittaranjan National Cancer Institute,22.5252694,88.3466423,False,False,10,40,13,317,0.8,4.2
+14,Institute Of Neurosciences Kolkata,22.5470227,88.3620613,False,True,7,23,8,250,0.69,3.6
+15,ESI Hospital Sealdah,22.5728574,88.3730073,True,False,14,65,21,262,0.9,3.3
+16,Chandi Tala Health Center,22.4866272,88.3460553,False,False,1,12,8,36,0.67,3.7
+17,Behala Balananda Brahmachari Hospital,22.5065586,88.3205755,True,False,4,39,11,212,0.8,3.9
+18,IRIS Hospital,22.4792072,88.375858,True,True,7,36,6,135,0.66,3.8
+19,Red Plus Society Nursing Home,22.4831664,88.3850406,False,True,4,34,15,189,0.7,3.5
+20,Paramount Nursing Home,22.5239877,88.3486944,True,True,8,46,5,88,0.78,4.3
+21,NRS Medical College & Hospital,22.5652972,88.3691544,True,True,24,110,21,746,0.93,4.3
+22,UNB Building NRS Medical College,22.5648794,88.3695623,True,True,17,142,22,1045,0.91,3.9
+23,Tarulia Upashasthya Kendra,22.5878701,88.4423075,False,True,7,48,14,168,0.79,4.3
+24,North Dum Dum Municipality Hospital,22.6609462,88.4355111,True,True,9,65,21,374,0.88,3.6
+25,Remedy Hospital,22.4652784,88.3898123,True,True,4,36,5,210,0.69,3.9
+26,Re-Life Hospital,22.6845585,88.3544138,True,True,3,29,6,68,0.76,3.4
+27,New Town Nursing Home,22.6149976,88.4321695,True,False,10,28,13,93,0.73,4.3
+28,The May Fair Hospital,22.624456,88.3785443,False,True,10,41,8,84,0.57,3.8
+29,Rameswara Nursing Home,22.5900155,88.3929551,False,False,10,18,15,227,0.8,3.4
+30,Bhagirathi Neotia Woman And Child Care Centre,22.5474203,88.3592599,False,False,5,43,10,182,0.72,4.0
+31,Rama Krishna Mission Seva Pratisthan,22.5234205,88.3519824,True,False,5,42,7,131,0.67,4.3
+32,Ramakrishna Sarada Mission Matri Bhavan,22.5137804,88.34363,False,False,2,34,13,92,0.56,4.5
+33,Harvard Medicare And Research Institute,22.542529,88.3651547,True,True,9,55,15,408,0.75,4.1
+34,Life Line Diagnostic Centre And Nursing Home,22.5477696,88.3542247,False,False,1,11,3,78,0.5,3.9
+35,Phoenix Hospital And Diagnostic Centre,22.6468547,88.4322274,False,False,1,19,5,92,0.53,3.8
+36,Swastik Seva Sadan,22.5347322,88.3743808,True,True,8,18,5,209,0.67,4.3
+37,Panihati State General Hospital,22.6929042,88.3980869,True,True,5,72,12,585,0.74,3.7
+38,Nightingale Hospital,22.546022,88.3515425,False,True,11,65,13,491,0.7,4.4
+39,Eskag Sanjeevani Hospital,22.6040075,88.3678195,True,False,8,31,8,231,0.73,3.6
+40,Fortis Healthcare Kolkata,22.5181685,88.3559132,True,True,10,59,24,361,0.84,4.7
+41,Institute Of Child Health,22.5386694,88.3723074,False,False,2,34,14,152,0.75,3.9
+42,Zenith Super Specialist Hospital,22.6630636,88.3780661,True,True,16,56,14,378,0.83,4.6
+43,B.N Basu Memorial Clinic,22.5165078,88.3530888,False,False,5,43,13,240,0.63,4.4
+44,Islamia Medical Institute,22.5427124,88.3664475,False,True,16,40,19,253,0.84,4.1
+45,Islamia Hospital,22.5447604,88.3708055,True,True,5,32,9,214,0.6,3.7
+46,Sahid Khudiram Bose Hospital,22.6631818,88.3771062,False,False,7,18,6,222,0.66,3.6
+47,Uttarpara State General Hospital,22.663208,88.3435006,True,True,10,89,14,476,0.9,3.3
+48,DM Hospitals,22.4660881,88.3105063,False,False,3,22,6,236,0.78,3.9
+49,Shradha Health Care,22.5086023,88.3380973,False,True,9,23,5,138,0.64,4.3
+50,People Meditreat,22.58174,88.3232278,True,False,6,30,15,86,0.64,3.9
