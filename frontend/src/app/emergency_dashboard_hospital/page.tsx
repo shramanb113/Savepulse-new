@@ -3,7 +3,7 @@ import "./dashboard.css";
 import "./dashboard.css";
 import { useState, useEffect } from "react";
 import SOSAlertCard from "@/components/SOSAlertCard";
-import EmergencyDetailModal from "@/components/EmergencyDetailModal";
+import EmergencyDetailModal from "@/components/EventDetailModal";
 
 export type AlertStatus = "pending" | "accepted" | "declined";
 export type EmergencyType = "Cardiac Arrest" | "Trauma" | "Stroke" | "Respiratory" | "Burns" | "Unknown";

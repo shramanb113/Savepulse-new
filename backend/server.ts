@@ -25,10 +25,10 @@ export const createServer = () => {
     res.json({ status: "ok" });
   });
 
-  app.get("/user/signup", userSignup);
-  app.get("/user/login", userLogin);
-  app.get("/hospital/signup", hospitalSignup);
-  app.get("/hospital/login", hospitalLogin);
+  app.post("/user/signup", userSignup);
+  app.post("/user/login", userLogin);
+  app.post("/hospital/signup", hospitalSignup);
+  app.post("/hospital/login", hospitalLogin);
   app.get("/user/data", getUserData);
 
   // routes

@@ -26,19 +26,21 @@ export default function HospitalSignup() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-
     const res = await fetch("http://localhost:3001/hospital/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify(form)
+      body: JSON.stringify({
+        id: crypto.randomUUID(),
+        name: form.hospitalName,
+        email: form.email,
+      })
     });
 
     const data = await res.json();
     console.log(data);
-
-    router.push("/hospital/dashboard");
+    router.push("/hospital");
   }
 
   return (

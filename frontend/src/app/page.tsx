@@ -2,7 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import Header from "@/components/Header";
-import BottomNav from "@/components/BottomNav";
 
 export default function LandingPage() {
   const router = useRouter();
